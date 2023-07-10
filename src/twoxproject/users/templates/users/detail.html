@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>{{ step.step_title }}</h1>
+<h3>{{ step.step_description }}</h3>
+<ul>
+{% for choice in step.choice_set.all %}
+    <li>{{ choice.choice_text }}</li>
+{% endfor %}
+</ul>
+<p>Created by: <a href="{% url 'users:user-steps' step_user.id %}">{{ step_user.username }}</a></p>
+<p>Published on: {{ step.pub_date }}</p>
+<br/>
+<form action = "{% url 'users:upvote_step' step.pk %}" method="POST">
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+        {% if upvoted %}
+            <button type="submit" name="step_id" value="{{step.id}}" class="btn btn-danger btn-sm">Downvote</button>
+        {% else %}
+            <button type="submit" name="step_id" value="{{step.id}}" class="btn btn-primary btn-sm">Upvote</button>
+        {% endif %}
+    {% else %}
+        <small><a href="{%url 'users:login'%}">Login </a>to upvote
+        </small>
+    {% endif %}
+    -{{total_upvotes}} upvotes
+
+</form>
+{%endblock %} 

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>Dashboard</h1>
+{% if messages %}
+{% for message in messages %}
+<div class="div-morphism alert alert-{{message.tags}}">{{message}}</div>
+{% endfor %}
+{% endif %}
+<div class="row">
+    <div class="col-md-4">.col-md-4</div>
+    <div class="col-md-4">.col-md-4</div>
+    <div class="col-md-4">
+        <h2>Recend added steps</h2>
+        {% if latest_step_list %}
+            <ul>
+            {% for step in latest_step_list %}
+             <li><a href="{% url 'users:detail' step.id %}">{{ step.step_title }}</a>- {{ step.total_upvotes }} upvotes</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No polls are available.</p>
+        {% endif %}
+        <a href="{%url 'users:step-recent-all'%}">See all steps</a>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Top Steps</h2>
+        {% if top_step_list %}
+            <ul>
+                {% for step in top_step_list %}
+                    <li>{{ step.total_upvotes }} upvotes - <a href="{% url 'users:detail' step.id %}">{{ step.step_title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No top steps available.</p>
+        {% endif %}
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <h2>Your Steps</h2>
+            {% if user_steps %}
+                <ul>
+                {% for step in user_steps %}
+                    <li><a href="{% url 'users:detail' step.id %}">{{ step.step_title }}</a> - {{ step.total_upvotes }} upvotes</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No steps created yet.</p>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <p>Level: {{ user_profile.level }}</p>
+<p>Total Unit Number: {{ user_profile.total_unit_number }}</p>
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <a href="{%url 'users:create_step'%}">Create step</a>
+    </div>
+
+</div>
+{%endblock %} 

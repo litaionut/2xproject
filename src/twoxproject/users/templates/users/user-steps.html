@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Level {{user.userprofile.level}}-{{ user.username }}'s Steps</h1>
+  {% if user_steps %}
+    <ul>
+    {% for step in user_steps %}
+      <li><a href="{% url 'users:detail' step.id %}">{{ step.step_title }}</a> - {{ step.total_upvotes }} upvotes</li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No steps created yet.</p>
+  {% endif %}
+{% endblock %}

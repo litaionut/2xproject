@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>All steps ordered by date</h1>
+{% if latest_step_list_all %}
+    <ul>
+    {% for step in latest_step_list_all %}
+        <li><a href="{% url 'users:detail' step.id %}">{{ step.step_title }}</a></li>
+        -{{total_upvotes}} upvotes
+
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+{%endblock %} 

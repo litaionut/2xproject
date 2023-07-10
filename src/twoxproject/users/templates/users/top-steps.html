@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Top Steps</h1>
+    {% if top_step_list %}
+        <ul>
+        {% for step in top_step_list %}
+            <li>{{ step.total_upvotes }} upvotes - <a href="{% url 'users:detail' step.id %}">{{ step.step_title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No steps are available.</p>
+    {% endif %}
+    <a href="{% url 'users:step-recent-all' %}" class="btn-morphism">See All Steps</a>
+{% endblock %}
