@@ -1,1 +1,1 @@
-web: gunicorn twoxproject.wsgi --logfile -
+web: gunicorn twoxproject.wsgi
