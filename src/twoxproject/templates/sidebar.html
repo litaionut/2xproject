@@ -1,0 +1,44 @@
+{% load crispy_forms_tags %}
+{% if messages %}
+{% for message in messages %}
+<div class="div-morphism alert alert-{{message.tags}}">{{message}}</div>
+{% endfor %}
+{% endif %}
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="{%url 'users:profile'%}">
+                  <span data-feather="home"></span>
+                  Dashboard <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{%url 'users:user-steps' user.id%}">
+                  <span data-feather="file"></span>
+                  Your steps
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{%url 'users:create_step'%}">
+                  <span data-feather="shopping-cart"></span>
+                  Add step
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="users"></span>
+                  See statistics
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="layers"></span>
+                  Get PRO
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>

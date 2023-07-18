@@ -30,7 +30,7 @@ app_name = "users"
 urlpatterns = [
     path('profile/',views.profile, name ='profile' ),
     path('login/',auth_view.LoginView.as_view(template_name= 'users/login.html'), name='login'),
-    path('register/',register_view, name='register'),
+    path('register/',views.register_view, name='register'),
     path('logout/',auth_view.LogoutView.as_view(template_name= 'users/logout.html'), name='logout'),
     
     path("profile/recent-steps/",views.step_list_recent, name="step-recent"),
@@ -42,6 +42,8 @@ urlpatterns = [
     path('profile/user-steps/<int:user_id>/', views.user_steps, name='user-steps'),
 
     path("profile/create-step", views.create_step, name='create_step'),
+    path('profile/autocomplete/', views.step_title_autocomplete, name='step_title_autocomplete'),
+
     path("profile/upvote_step/<int:pk>", UpvoteView, name ='upvote_step'),
     path("profile/todo", views.todo, name='todo'),
 

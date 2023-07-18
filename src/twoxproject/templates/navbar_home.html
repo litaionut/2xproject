@@ -9,11 +9,11 @@
       </a>
       <ul class="nav d-flex">
         {% if user.is_authenticated %}
-        <li><a href="{%url 'users:profile'%}" class="btn-morphism">{{request.user.username}}-{{user.userprofile.level}}</a></li>
-        <li><a href="{%url 'users:logout'%}" class="btn-morphism">Logout</a></li>
+        <li><a href="{%url 'users:profile'%}" class="btn btn-success">{{request.user.username}}-{{user.userprofile.level}}</a></li>
+        <li><a href="{%url 'users:logout'%}" class="btn btn-outline-success">Logout</a></li>
         {% else %}
-        <li><a href="{%url 'users:login'%}" class="btn-morphism">Login</a></li>
-        <li><a href="{%url 'users:register'%}" class="btn-morphism">Sign Up</a></li>
+        <li><a href="{%url 'users:login'%}" class="btn btn-success">Login</a></li>
+        <li><a href="{%url 'users:register'%}" class="btn btn-outline-success">Sign Up</a></li>
         {% endif %}
       </ul>
     </div>

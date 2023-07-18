@@ -10,6 +10,11 @@ from django.template import loader
 from .models import Step, UserProfile
 from django.http import Http404
 from django.contrib.auth.models import User
+#autocomplete title ---
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
+from django.db.models import Q
+#---
 
 
 
@@ -25,17 +30,21 @@ def register_view(request, *args, **kwargs):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f"Hi {username}, your account was created succesfully.\n Please log in.")
-            return redirect('login')
+            return redirect('users:login')
     else:
         form = UserRegisterForm()
     return render(request,'users/register.html',{'form':form})
 @login_required
 def profile(request):
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+    except UserProfile.DoesNotExist:
+        user_profile = UserProfile.objects.create(user=request.user)
 
     latest_step_list = get_latest_steps()
     top_step_list = get_top_steps()
     user_steps = get_user_steps(request.user)
-    user_profile = UserProfile.objects.get(user=request.user)
+    user_profile = user_profile
 
 
 
@@ -155,9 +164,23 @@ def get_user_steps(user):
 def user_steps(request, user_id):
     user = get_object_or_404(User, id=user_id)
     user_steps = get_user_steps(user)
+    user_profile = UserProfile.objects.get(user=request.user)
+
 
     context = {
         'user': user,
         'user_steps': user_steps,
+        "user_profile": user_profile,
+
     }
     return render(request, 'users/user-steps.html', context)
+@require_GET
+def step_title_autocomplete(request):
+    term = request.GET.get('term', '')
+
+    # Query the Step model for similar step titles
+    similar_steps = Step.objects.filter(Q(step_title__icontains=term))
+
+    # Extract the step titles and return them as a JSON response
+    titles = [step.step_title for step in similar_steps]
+    return JsonResponse(titles, safe=False)

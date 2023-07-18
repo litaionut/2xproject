@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
-
 {% block content %}
+{% include 'sidebar.html' %}
+
+<div class="col-md-9">
   <h1>Level {{user.userprofile.level}}-{{ user.username }}'s Steps</h1>
+  <p>Total Unit Number: {{ user_profile.total_unit_number }}</p>
+
+
   {% if user_steps %}
     <ul>
     {% for step in user_steps %}
@@ -11,4 +16,8 @@
   {% else %}
     <p>No steps created yet.</p>
   {% endif %}
+  <div class="col-md-12">
+    <a type="button" class="btn btn-outline-success" href="{%url 'users:create_step'%}">Create step</a>
+</div>
+</div>
 {% endblock %}

@@ -1,64 +1,46 @@
 body{
-  background-color: #e0e0e0;
+  /* background-color: #e0e0e0; */
   height:100%;
   width:100%;
   position: absolute;
 }
-h3{
-  color:#31344b;
-}
-.div-morphism{
-  padding-top: 2%;
-  padding-bottom: 2%;
-  border-radius: 0px;
-  background: #e0e0e0;
-  box-shadow:  2px 2px 6px #cecece,
-              -2px -2px 6px #f2f2f2;
-}
-.alert-succes{
-  --bs-alert-border-color:#e0e0e0;
-}
-.btn-morphism{
-  background: #e0e0e0;
-  border: none;
-  color:#31344b;
-  padding: 15px 32px;
-  margin-right: .75rem;
-  margin-bottom:.75rem ;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: .55rem;
-  box-shadow:  3px 3px 6px #b8b9be,
-              -3px -3px 6px #fff;
-}
-.btn-morphism {
-  transition-duration: 0.4s;
+/*Buttons*/
+.btn{
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
-.btn-morphism:hover {
-  background: linear-gradient(145deg, #f0f0f0, #cacaca);
-  box-shadow: inset 3px 3px 6px #bebebe,
-              inset -3px -3px 6px #ffffff;
-  border-radius: .55rem;}
+/*Home page*/
+.container-home{
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 80%;
+}
+/*Jumbotron*/
+.jumbotron{
+  background-color: rgb(220, 221, 220);
+}
+/*Autocomplete form*/
+.ui-autocomplete {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  cursor: default;
+  background-color: #fff;
+  position: absolute;
+  width: 100%;
+  z-index: 9999;
+}
 
-.form-control{
-  border-radius: 28px;
-background: #e0e0e0;
-box-shadow: inset 14px 14px 28px #cecece,
-            inset -14px -14px 28px #f2f2f2;
-}
-.form-control:focus {
-  border-color: #e0e0e0;
-  background-color: #e0e0e0 ;
-  box-shadow: inset 14px 14px 28px #cecece,
-                          inset -14px -14px 28px #f2f2f2;
+.ui-autocomplete li {
+  padding: 4px 10px;
+  cursor: pointer;
 }
 
-.navbar{
-  background: #e0e0e0;
-}
-.title-h3{
-margin-bottom: 10%;
+.ui-autocomplete li:hover {
+  background-color: #f4f4f4;
+  font-weight: bold;
 }

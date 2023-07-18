@@ -4,11 +4,69 @@
 {% load static %}
 
 {% block content %}
+{% include 'sidebar.html' %}
+<div class="col-md-9">
+<style>
+  .ui-autocomplete {
+      max-height: 200px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      cursor: default;
+      position: absolute;
+      z-index: 9999;
+      background-color: #fff;
+  }
+
+  .ui-autocomplete li {
+      padding: 4px 10px;
+      cursor: pointer;
+  }
+
+  .ui-autocomplete li:hover {
+      background-color: #f4f4f4;
+      font-weight: bold;
+  }
+  .popover {
+        max-width: 300px;
+    }
+</style>
+
+<script>
+  $(function() {
+      var stepTitleInput = $('#id_step_title');
+      var popoverContent = $('#title-popover .popover-content');
+  
+      stepTitleInput.autocomplete({
+          source: "{% url 'users:step_title_autocomplete' %}",
+          minLength: 2,
+          delay: 300,
+          select: function(event, ui) {
+              stepTitleInput.val(ui.item.value);
+              return false;
+          },
+          open: function(event, ui) {
+              var count = $(this).data('ui-autocomplete').menu.element.find('li').length;
+              popoverContent.text(count + ' recommendation(s) found.');
+          }
+      });
+  
+      stepTitleInput.on('focusout', function() {
+          popoverContent.text('');
+      });
+  });
+  </script>
+
+
+
+
 <h2>Add Method</h2>
 <!-- create_step.html -->
-<form method="post">
+
+  <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Step</button>
+    {{ form|crispy }}
+
+    <button class="btn btn-outline-success" type="submit">Create Step</button>
   </form>
+</div>
 {%endblock %} 
