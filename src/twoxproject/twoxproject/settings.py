@@ -133,7 +133,7 @@ STATICFILES_DIRS =[
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CSRF_TRUSTED_ORIGINS = ['https://2xproject-production.up.railway.app/','https://*.127.0.0.1']
-
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 LOGIN_REDIRECT_URL = 'users:profile'
