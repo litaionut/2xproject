@@ -184,3 +184,16 @@ def step_title_autocomplete(request):
     # Extract the step titles and return them as a JSON response
     titles = [step.step_title for step in similar_steps]
     return JsonResponse(titles, safe=False)
+def _origin_verified(self, request):
+    request_origin = request.META["HTTP_ORIGIN"]
+    try:
+        good_host = request.get_host()
+    except DisallowedHost:
+        pass
+    else:
+        good_origin = "%s://%s" % (
+            "https" if request.is_secure() else "http",
+            good_host,
+        )
+        if request_origin == good_origin:
+            return True
